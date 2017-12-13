@@ -41,12 +41,12 @@ public class TodoDAOImpl implements TodoDAO{
 	}
 
 	@Override
-	public Todo createTodo(String TodoJSON, int userId) {
+	public Todo createTodo(String todoJSON, int userId) {
 		ObjectMapper mapper = new ObjectMapper();
 		User u = em.find(User.class, userId);
 		
 		try {
-			Todo t = mapper.readValue(TodoJSON, Todo.class);
+			Todo t = mapper.readValue(todoJSON, Todo.class);
 			t.setCreatedAt(new java.sql.Date(new java.util.Date().getTime()));
 			t.setCompleted("false");
 			t.setUser(u);
@@ -60,7 +60,7 @@ public class TodoDAOImpl implements TodoDAO{
 	}
 
 	@Override
-	public Todo updateTodo(String TodoJSON, int userId, int todoId) {
+	public Todo updateTodo(String todoJSON, int userId, int todoId) {
 		ObjectMapper mapper = new ObjectMapper();
 		Todo t = em.find(Todo.class, todoId);
 //		User u = em.find(User.class, userId) //don't need this step because the todo should already exist in the db. don't need to do this to set the user regardless.
@@ -68,7 +68,7 @@ public class TodoDAOImpl implements TodoDAO{
 	
 		try {
 			
-			Todo newTodo = mapper.readValue(TodoJSON, Todo.class);
+			Todo newTodo = mapper.readValue(todoJSON, Todo.class);
 			if(t.getUser().getId() == userId) {
 				t.setCompleted(newTodo.isCompleted()); //return to this later after we know all of the things we will want to update in a given update
 				/*

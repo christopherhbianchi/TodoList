@@ -13,8 +13,8 @@ public interface TodoDAO {
 	public Todo showById(int userId, int todoId);
 	
 	//CUD
-	public Todo createTodo(String TodoJSON, int userId);
-	public Todo updateTodo(String TodoJSON, int userId, int todoId);
+	public Todo createTodo(String todoJSON, int userId);
+	public Todo updateTodo(String todoJSON, int userId, int todoId);
 	public boolean destroyTodo(int userId, int todoId);
 
 }
